@@ -5,7 +5,7 @@ import pino from 'pino-http';
 import 'dotenv/config';
 
 const app = express();
-const PORT = process.env.Port ?? 3000;
+const PORT = process.env.PORT ?? 3000;
 
 app.use(express.json());
 app.use(cors());
@@ -26,29 +26,18 @@ app.use(
   }),
 );
 
-// Логування часу
-app.use((req, res, next) => {
-  console.log(`Time: ${new Date().toLocaleString()}`);
-  next();
+app.get('/notes', (req, res) => {
+  res.status(200).json({ message: 'Retrieved all notes' });
 });
 
-// Маршрут
-app.post('/users', (req, res) => {
-  console.log(req.body);
-  res.status(200).json({ message: 'user created!' });
+app.get('/notes/:noteId', (req, res) => {
+  res.status(200).json({ message: 'Retrieved note with ID: id_param' });
 });
 
-// Маршрут для тестування middleware помилки
-app.get('/test-error', (req, res) => {
-  // Штучна помилка для прикладу
-  throw new Error('Something went wrong');
+app.get('/test-error', () => {
+  throw new Error('Simulated server error');
 });
 
-app.use((req, res) => {
-  res.status(404).json({ message: 'Route not found' });
-});
-
-// Middleware для обробки помилок
 app.use((err, req, res, next) => {
   console.error(err);
 
