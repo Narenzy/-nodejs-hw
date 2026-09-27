@@ -4,7 +4,7 @@ import cors from 'cors';
 import pino from 'pino-http';
 import 'dotenv/config';
 import { connectMongoDB } from './db/connectMongoDB.js';
-import { Student } from './models/student';
+import { Student } from './models/student.js';
 
 const app = express();
 const PORT = process.env.PORT ?? 3000;
