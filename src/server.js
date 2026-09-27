@@ -29,22 +29,18 @@ app.use(
   }),
 );
 
-app.get('/student', async (req, res) => {
+app.get('/students', async (req, res) => {
   const students = await Student.find();
   res.status(200).json(students);
 });
 
-app.get('/notes', (req, res) => {
-  res.status(200).json({ message: 'Retrieved all notes' });
-});
-
-app.get('/notes/:noteId', (req, res) => {
-  const { noteId } = req.params;
-  res.status(200).json({ message: `Retrieved note with ID: ${noteId}` });
-});
-
-app.get('/test-error', () => {
-  throw new Error('Simulated server error');
+app.get('/students/:studentId', async (req, res) => {
+  const { studentId } = req.params;
+  const student = await Student.findById(studentId);
+  if (!student) {
+    return res.status(404).json({ message: 'Student not found' });
+  }
+  res.status(200).json(student);
 });
 
 app.use((req, res) => {
