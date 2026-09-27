@@ -3,7 +3,7 @@ import express from 'express';
 import cors from 'cors';
 import pino from 'pino-http';
 import 'dotenv/config';
-import { connectMongoDB } from './db/connectMongoDB';
+import { connectMongoDB } from './db/connectMongoDB.js';
 import { Student } from './models/student';
 
 const app = express();
