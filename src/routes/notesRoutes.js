@@ -3,7 +3,7 @@ import {
   getNotes,
   getNoteId,
   createNote,
-} from '../controllers/studentsControllers.js';
+} from '../controllers/notesControllers.js';
 
 const router = Router();
 
