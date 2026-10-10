@@ -22,12 +22,12 @@ export const createNote = async (req, res) => {
 export const updateNote = async (req, res) => {
   const { noteId } = req.params;
   const note = await Note.findByIdAndUpdate(noteId, req.body, {
-    new: true,
+    returnDocument: 'after',
     runValidators: true,
   });
 
   if (!note) {
-    throw createHttpError(404, ' Note not found');
+    throw createHttpError(404, 'Note not found');
   }
   res.status(200).json(note);
 };
@@ -39,5 +39,5 @@ export const deleteNote = async (req, res) => {
   if (!note) {
     throw createHttpError(404, 'Note not found');
   }
-  res.sendStatus(204);
+  res.status(200).json(note);
 };
