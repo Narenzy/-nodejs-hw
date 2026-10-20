@@ -6,10 +6,12 @@ import {
   deleteNote,
   updateNote,
 } from '../controllers/notesController.js';
+import { celebrate } from 'celebrate';
+import { getNotesSchema } from '../validation/notesValidation.js';
 
 const router = Router();
 
-router.get('/notes', getAllNotes);
+router.get('/notes', celebrate(getNotesSchema), getAllNotes);
 
 router.get('/notes/:noteId', getNoteById);
 
