@@ -6,10 +6,12 @@ import {
   deleteNote,
   updateNote,
 } from '../controllers/notesController.js';
-import { celebrate } from 'celebrate';
+import { celebrate, celebrator } from 'celebrate';
 import {
   getAllNotesSchema,
   noteIdSchema,
+  createNoteSchema,
+  updateNoteSchema,
 } from '../validation/notesValidation.js';
 
 const router = Router();
@@ -18,10 +20,10 @@ router.get('/notes', celebrate(getAllNotesSchema), getAllNotes);
 
 router.get('/notes/:noteId', celebrate(noteIdSchema), getNoteById);
 
-router.post('/notes', createNote);
+router.post('/notes', celebrate(createNoteSchema), createNote);
 
-router.patch('/notes/:noteId', updateNote);
+router.patch('/notes/:noteId', celebrate(updateNoteSchema), updateNote);
 
-router.delete('/notes/:noteId', deleteNote);
+router.delete('/notes/:noteId', celebrator(noteIdSchema), deleteNote);
 
 export default router;

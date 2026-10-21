@@ -24,3 +24,20 @@ export const noteIdSchema = {
       }),
   }),
 };
+
+export const createNoteSchema = {
+  [Segments.BODY]: Joi.object({
+    title: Joi.string().min(1).required(),
+    tag: Joi.string().valid(...TAGS),
+    content: Joi.string().allow(''),
+  }),
+};
+
+export const updateNoteSchema = {
+  ...noteIdSchema,
+  [Segments.BODY]: Joi.object({
+    title: Joi.string().min(1),
+    tag: Joi.string().valid(...TAGS),
+    content: Joi.string().allow(''),
+  }).min(1),
+};
