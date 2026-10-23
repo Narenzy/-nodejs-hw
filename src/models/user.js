@@ -26,4 +26,17 @@ const userSchema = new Schema(
   },
 );
 
+userSchema.pre('save', function () {
+  if (this.isNew && !this.username) {
+    this.username = this.email;
+  }
+});
+
+userSchema.set('toJSON', {
+  transform(doc, ret) {
+    delete ret.password;
+    return ret;
+  },
+});
+
 export const User = model('User', userSchema);
