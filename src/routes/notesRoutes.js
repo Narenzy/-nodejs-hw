@@ -16,7 +16,7 @@ import {
 } from '../validations/notesValidation.js';
 
 const router = Router();
-router.use(authenticate);
+router.use('/notes', authenticate);
 
 router.get('/notes', celebrate(getAllNotesSchema), getAllNotes);
 

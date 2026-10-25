@@ -23,6 +23,13 @@ app.use(
 app.use(cors());
 app.use(cookieParser());
 
+app.get('/', (req, res) => {
+  res.status(200).json({
+    status: 'ok',
+    message: 'Notes API is running',
+  });
+});
+
 app.use(authRoutes);
 app.use(notesRoute);
 app.use(notFoundHandler);
