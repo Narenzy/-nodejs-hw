@@ -10,7 +10,7 @@ import {
   refreshUserSession,
   logoutUser,
   loginUser,
-} from '../controllers/authControllers.js';
+} from '../controllers/authController.js';
 
 const router = Router();
 
