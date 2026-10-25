@@ -10,6 +10,7 @@ import notesRoute from './routes/notesRoutes.js';
 import { errors } from 'celebrate';
 import authRoutes from './routes/authRoutes.js';
 import cookieParser from 'cookie-parser';
+import userRoutes from './routes/userRoutes.js';
 
 const app = express();
 const PORT = process.env.PORT ?? 3000;
@@ -32,6 +33,7 @@ app.get('/', (req, res) => {
 
 app.use(authRoutes);
 app.use(notesRoute);
+app.use(userRoutes);
 app.use(notFoundHandler);
 app.use(errors());
 app.use(errorHandler);
